@@ -1,6 +1,6 @@
-# Rainbow — Bookly Customer Experience Agent
+# Rainbow — Customer Experience Agent
 
-I built Rainbow, an AI customer experience agent for **Bookly**, a fictional online bookstore. It's
+I built Rainbow, an AI customer experience agent for **Customer Experience**, a fictional online bookstore. It's
 built with Google's [ADK](https://adk.dev) (Agent Development Kit) via `agents-cli`, and handles
 four things: order status inquiries, return/refund requests, order cancellation (before shipping),
 and general questions (shipping, policies, password reset).
@@ -56,7 +56,7 @@ RAG, or Stytch) → grounded response, or **escalation** if the SOP doesn't cove
 | `escalate_to_human` | Logs a handoff for a human agent | Local log file | Mocked (no paging system attached) |
 
 ### RAG (`search_policy_kb`)
-- Source document: [`data/bookly_knowledge_base.md`](data/bookly_knowledge_base.md) — Bookly's
+- Source document: [`data/customer_experience_knowledge_base.md`](data/customer_experience_knowledge_base.md) — Customer Experience's
   shipping, returns, payment, account, and loyalty-program policies, which I wrote as the fictional
   content for this exercise.
 - I index it by section (`##` headers) into a ChromaDB collection using its built-in local
@@ -127,7 +127,7 @@ distinction is one of the more important design decisions in this build.
    Eval testing caught this rule initially over-triggering on the word "Delivered" alone with no
    actual customer complaint — I tightened the instruction to require an explicit non-receipt
    claim, and confirmed the fix with a regression eval case. See [Evaluation](#evaluation).
-8. **Out-of-scope requests.** Anything unrelated to Bookly — general knowledge, other
+8. **Out-of-scope requests.** Anything unrelated to Customer Experience — general knowledge, other
    companies/products, creative writing, coding help, opinions — gets politely declined and
    redirected, not attempted.
 9. **Prompt injection / instruction extraction.** Attempts to override Rainbow's role, extract its
@@ -149,7 +149,7 @@ distinction is one of the more important design decisions in this build.
 - **[`docs/SOP.md`](docs/SOP.md)** — the step-by-step human process (identity verification, each
   use case's decision tree, escalation criteria, data schema) that I wrote first and built
   Rainbow's instruction and tools to replicate.
-- **[`data/bookly_knowledge_base.md`](data/bookly_knowledge_base.md)** — Bookly's policies, the
+- **[`data/customer_experience_knowledge_base.md`](data/customer_experience_knowledge_base.md)** — Customer Experience's policies, the
   source document I wrote and indexed for RAG.
 
 ---
@@ -161,7 +161,7 @@ docs/
   SOP.md                        Human support-agent process this agent replicates
   Rainbow_Eval_Report.pdf       Full eval methodology + results write-up
 data/
-  bookly_knowledge_base.md      RAG source document
+  customer_experience_knowledge_base.md      RAG source document
 rag/
   build_index.py                Chunk + embed the knowledge base into ChromaDB
   query.py                      Standalone RAG query function
@@ -187,7 +187,7 @@ rainbow/                        The ADK project
 ## Setup — running it yourself
 
 **Prerequisites:** `uv`, `agents-cli` (`uv tool install google-agents-cli`), a Google Cloud
-project with the Sheets API and Vertex AI API enabled, a free [Stytch](https://stytch.com) test
+project with the Sheets API and Agent Platform API enabled, a free [Stytch](https://stytch.com) test
 project.
 
 1. **Install dependencies**
@@ -237,7 +237,7 @@ project.
 ## Examples — the 3 minimum requirements
 
 Real transcripts, captured by actually running the agent (not written by hand). Emails shown are
-Bookly's dummy customer data, not real people.
+Customer Experience's dummy customer data, not real people.
 
 ### 1. Multi-turn interaction (collecting information before responding)
 
@@ -245,7 +245,7 @@ Rainbow won't answer an order question until it has verified the customer's iden
 separate exchanges:
 
 ```
-user:     I'd like some help, my email is sarah.chen@example.com
+user:     I'd like some help, my email is hasan2296@outlook.com
 rainbow:  [calls send_auth_code] → I've sent a 6-digit verification code to your email.
           Could you share that code with me?
 user:     123456
@@ -267,7 +267,7 @@ in code and **writes the result to the live Google Sheet**:
 ```
 user:     I'd like to return order BK-10001, I changed my mind.
 rainbow:  [calls initiate_return(order_number="BK-10001", reason="I changed my mind.",
-           verified_email="sarah.chen@example.com")]
+           verified_email="hasan2296@outlook.com")]
           → Return initiated for order BK-10001 (The Midnight Library). A return QR code
             has been emailed to the customer — they should bring the book and that QR code
             to their nearest USPS, UPS, or FedEx store, no printer needed. Refund will be
@@ -312,3 +312,35 @@ cd rainbow
 agents-cli eval run --dataset tests/eval/datasets/single-turn.json --config tests/eval/eval_config_single_turn.yaml
 agents-cli eval run --dataset tests/eval/datasets/multi-turn.json --config tests/eval/eval_config_multi_turn.yaml
 ```
+
+---
+
+## Building with Google Antigravity & the Reusable Skill
+
+This agent modernization was engineered end-to-end using **Google Antigravity**, leveraging agentic pair programming workflows to transition from a prototype to a production-grade GCP service.
+
+### 1. Architectural Alignment with Plan Mode (`/plan`)
+Throughout the development lifecycle, Antigravity's **Plan Mode** was utilized to produce structured execution plans and design artifacts before modifying production infrastructure:
+- **Phase 0 Execution & Modernization Plans**: Defined the path from local Google Sheets and mock databases to Cloud Firestore and Agent Platform embeddings.
+- **Identity & Rebranding Plans**: Coordinated a zero-trace rebranding from "Bookly" to "Customer Experience" and established authenticated customer records (`hasan2296@outlook.com`).
+- **Cloud Run Deployment & Verification Plans**: Outlined Artifact Registry container builds, zero-downtime rolling deploys, and local IAM-authenticated proxy tunneling.
+
+### 2. Encapsulation into a Reusable Skill (`adk-gcp-agent-builder`)
+To ensure that building future enterprise AI agents does not require reinventing infrastructure, auth workflows, and deployment scripts from scratch, the entire lifecycle was distilled into an official **Antigravity Skill** included directly in this repository at [`skills/adk-gcp-agent-builder/`](skills/adk-gcp-agent-builder/):
+
+```
+skills/adk-gcp-agent-builder/
+├── SKILL.md                          # Full instructional guide and 7-phase runbook
+├── references/
+│   ├── firestore_patterns.md         # Stateful collections, OTP lockouts, & atomic order mutations
+│   ├── agent_platform_rag_patterns.md # text-embedding-004 vector search in Cloud Firestore
+│   └── cloud_run_deploy_patterns.md  # Dockerfile (uv), Artifact Registry, and IAM proxying
+└── templates/
+    ├── gcp_client.py                 # Singleton adapter (Firestore + Agent Platform + Mock fallback)
+    ├── seed_script.py                # Generic Firestore customer/order/OTP seeder
+    ├── index_kb_script.py            # Markdown header chunker & vector indexer
+    └── web_chat_template.py          # Standalone web chat UI with automatic gcloud auth token injection
+```
+
+By adding this skill to any agent developer's environment (or invoking it in Antigravity), creating a new GCP-native ADK agent with Cloud Run, Firestore, and Agent Platform is streamlined into a single, repeatable, error-free workflow.
+

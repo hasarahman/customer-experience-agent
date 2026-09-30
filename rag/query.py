@@ -1,14 +1,14 @@
 import chromadb
 
 DB_PATH = "/Users/hasanrahman/dcg/rag/chroma_db"
-COLLECTION = "bookly_knowledge_base"
+COLLECTION = "customer_experience_knowledge_base"
 
 _client = chromadb.PersistentClient(path=DB_PATH)
 _collection = _client.get_collection(COLLECTION)
 
 
 def search_policy_kb(query: str, n_results: int = 2) -> list[str]:
-    """Search Bookly's policy/FAQ knowledge base and return the most relevant chunks."""
+    """Search Customer Experience's policy/FAQ knowledge base and return the most relevant chunks."""
     results = _collection.query(query_texts=[query], n_results=n_results)
     return results["documents"][0]
 

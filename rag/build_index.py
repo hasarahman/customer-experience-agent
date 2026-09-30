@@ -1,9 +1,9 @@
 import re
 import chromadb
 
-KB_PATH = "/Users/hasanrahman/dcg/data/bookly_knowledge_base.md"
+KB_PATH = "/Users/hasanrahman/dcg/data/customer_experience_knowledge_base.md"
 DB_PATH = "/Users/hasanrahman/dcg/rag/chroma_db"
-COLLECTION = "bookly_knowledge_base"
+COLLECTION = "customer_experience_knowledge_base"
 
 
 def chunk_markdown(text: str) -> list[dict]:

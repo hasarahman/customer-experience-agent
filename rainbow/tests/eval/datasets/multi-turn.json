@@ -7,7 +7,7 @@
           "rainbow": {
             "agent_id": "rainbow",
             "agent_type": "SingleAgent",
-            "instruction": "Bookly customer support agent."
+            "instruction": "Customer Experience customer support agent."
           }
         },
         "turns": [
@@ -19,7 +19,7 @@
                 "content": {
                   "parts": [
                     {
-                      "text": "I'd like some help, my email is sarah.chen@example.com"
+                      "text": "I'd like some help, my email is hasan2296@outlook.com"
                     }
                   ],
                   "role": "user"
@@ -33,7 +33,7 @@
                       "function_call": {
                         "name": "send_auth_code",
                         "args": {
-                          "email": "sarah.chen@example.com"
+                          "email": "hasan2296@outlook.com"
                         }
                       }
                     }
@@ -49,7 +49,7 @@
                       "function_response": {
                         "name": "send_auth_code",
                         "response": {
-                          "result": "A 6-digit verification code was sent to sarah.chen@example.com. Ask the customer for it."
+                          "result": "A 6-digit verification code was sent to hasan2296@outlook.com. Ask the customer for it."
                         }
                       }
                     }
@@ -92,7 +92,7 @@
                       "function_call": {
                         "name": "verify_auth_code",
                         "args": {
-                          "email": "sarah.chen@example.com",
+                          "email": "hasan2296@outlook.com",
                           "code": "123456"
                         }
                       }
@@ -156,7 +156,7 @@
           "rainbow": {
             "agent_id": "rainbow",
             "agent_type": "SingleAgent",
-            "instruction": "Bookly customer support agent."
+            "instruction": "Customer Experience customer support agent."
           }
         },
         "turns": [
@@ -305,7 +305,7 @@
           "rainbow": {
             "agent_id": "rainbow",
             "agent_type": "SingleAgent",
-            "instruction": "Bookly customer support agent."
+            "instruction": "Customer Experience customer support agent."
           }
         },
         "turns": [
@@ -454,7 +454,7 @@
           "rainbow": {
             "agent_id": "rainbow",
             "agent_type": "SingleAgent",
-            "instruction": "Bookly customer support agent."
+            "instruction": "Customer Experience customer support agent."
           }
         },
         "turns": [
@@ -466,7 +466,7 @@
                 "content": {
                   "parts": [
                     {
-                      "text": "I'd like some help, my email is sarah.chen@example.com"
+                      "text": "I'd like some help, my email is hasan2296@outlook.com"
                     }
                   ],
                   "role": "user"
@@ -480,7 +480,7 @@
                       "function_call": {
                         "name": "send_auth_code",
                         "args": {
-                          "email": "sarah.chen@example.com"
+                          "email": "hasan2296@outlook.com"
                         }
                       }
                     }
@@ -496,7 +496,7 @@
                       "function_response": {
                         "name": "send_auth_code",
                         "response": {
-                          "result": "A 6-digit verification code was sent to sarah.chen@example.com. Ask the customer for it."
+                          "result": "A 6-digit verification code was sent to hasan2296@outlook.com. Ask the customer for it."
                         }
                       }
                     }
@@ -539,7 +539,7 @@
                       "function_call": {
                         "name": "verify_auth_code",
                         "args": {
-                          "email": "sarah.chen@example.com",
+                          "email": "hasan2296@outlook.com",
                           "code": "123456"
                         }
                       }
@@ -603,7 +603,7 @@
           "rainbow": {
             "agent_id": "rainbow",
             "agent_type": "SingleAgent",
-            "instruction": "Bookly customer support agent."
+            "instruction": "Customer Experience customer support agent."
           }
         },
         "turns": [
@@ -615,7 +615,7 @@
                 "content": {
                   "parts": [
                     {
-                      "text": "I'd like some help, my email is sarah.chen@example.com"
+                      "text": "I'd like some help, my email is hasan2296@outlook.com"
                     }
                   ],
                   "role": "user"
@@ -629,7 +629,7 @@
                       "function_call": {
                         "name": "send_auth_code",
                         "args": {
-                          "email": "sarah.chen@example.com"
+                          "email": "hasan2296@outlook.com"
                         }
                       }
                     }
@@ -645,7 +645,7 @@
                       "function_response": {
                         "name": "send_auth_code",
                         "response": {
-                          "result": "A 6-digit verification code was sent to sarah.chen@example.com. Ask the customer for it."
+                          "result": "A 6-digit verification code was sent to hasan2296@outlook.com. Ask the customer for it."
                         }
                       }
                     }
@@ -688,7 +688,7 @@
                       "function_call": {
                         "name": "verify_auth_code",
                         "args": {
-                          "email": "sarah.chen@example.com",
+                          "email": "hasan2296@outlook.com",
                           "code": "123456"
                         }
                       }
@@ -752,7 +752,7 @@
           "rainbow": {
             "agent_id": "rainbow",
             "agent_type": "SingleAgent",
-            "instruction": "Bookly customer support agent."
+            "instruction": "Customer Experience customer support agent."
           }
         },
         "turns": [
@@ -764,7 +764,7 @@
                 "content": {
                   "parts": [
                     {
-                      "text": "I'd like some help, my email is sarah.chen@example.com"
+                      "text": "I'd like some help, my email is hasan2296@outlook.com"
                     }
                   ],
                   "role": "user"
@@ -778,7 +778,7 @@
                       "function_call": {
                         "name": "send_auth_code",
                         "args": {
-                          "email": "sarah.chen@example.com"
+                          "email": "hasan2296@outlook.com"
                         }
                       }
                     }
@@ -794,7 +794,7 @@
                       "function_response": {
                         "name": "send_auth_code",
                         "response": {
-                          "result": "A 6-digit verification code was sent to sarah.chen@example.com. Ask the customer for it."
+                          "result": "A 6-digit verification code was sent to hasan2296@outlook.com. Ask the customer for it."
                         }
                       }
                     }
@@ -837,7 +837,7 @@
                       "function_call": {
                         "name": "verify_auth_code",
                         "args": {
-                          "email": "sarah.chen@example.com",
+                          "email": "hasan2296@outlook.com",
                           "code": "123456"
                         }
                       }
@@ -901,7 +901,7 @@
           "rainbow": {
             "agent_id": "rainbow",
             "agent_type": "SingleAgent",
-            "instruction": "Bookly customer support agent."
+            "instruction": "Customer Experience customer support agent."
           }
         },
         "turns": [

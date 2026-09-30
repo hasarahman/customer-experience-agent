@@ -11,7 +11,7 @@ from stytch.core.response_base import StytchError
 load_dotenv()
 
 _RAG_DB_PATH = "/Users/hasanrahman/dcg/rag/chroma_db"
-_RAG_COLLECTION = "bookly_knowledge_base"
+_RAG_COLLECTION = "customer_experience_knowledge_base"
 
 _rag_client = chromadb.PersistentClient(path=_RAG_DB_PATH)
 _rag_collection = _rag_client.get_collection(_RAG_COLLECTION)
@@ -47,10 +47,10 @@ def _read_tab(tab_range: str) -> list[dict]:
 
 
 def search_policy_kb(query: str) -> str:
-    """Searches Bookly's policy and FAQ knowledge base for general questions.
+    """Searches Customer Experience's policy and FAQ knowledge base for general questions.
 
     Use this for questions about shipping times/costs, return and refund policy,
-    payment methods, password reset process, loyalty program, or other Bookly
+    payment methods, password reset process, loyalty program, or other Customer Experience
     policies that are not specific to one customer's order.
 
     Args:
@@ -67,7 +67,7 @@ def search_policy_kb(query: str) -> str:
 
 
 def lookup_order(order_number: str, verified_email: str) -> str:
-    """Looks up an order in Bookly's Orders sheet by order number.
+    """Looks up an order in Customer Experience's Orders sheet by order number.
 
     Returns shipping status, the customer it belongs to, what was ordered,
     and whether it's eligible for return.
@@ -165,7 +165,7 @@ def initiate_return(order_number: str, reason: str, verified_email: str) -> str:
     if days_elapsed is not None and days_elapsed > RETURN_WINDOW_DAYS:
         return (
             f"Order {order_number} ({order_row.get('book_ordered')}) was placed {days_elapsed} "
-            f"days ago, which is past Bookly's {RETURN_WINDOW_DAYS}-day return window. This "
+            f"days ago, which is past Customer Experience's {RETURN_WINDOW_DAYS}-day return window. This "
             f"order is not eligible for a standard return."
         )
 

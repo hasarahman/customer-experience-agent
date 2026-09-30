@@ -1,4 +1,4 @@
-# Bookly Customer Experience SOP
+# Customer Experience SOP
 
 ## Tools
 - **Google Sheets (DB):** `Orders`, `Customers` tabs
